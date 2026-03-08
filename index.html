@@ -2,82 +2,74 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<title>Ramo de flores</title>
+<title>Ramo animado</title>
 
 <style>
 
 body{
-    background: linear-gradient(#ffd6e7,#fff);
-    height:100vh;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    flex-direction:column;
-    font-family: Arial;
+background:#ffe6f0;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+height:100vh;
+font-family:Arial;
 }
 
-.ramo{
-    position:relative;
-    animation: flotar 3s infinite ease-in-out;
+svg{
+width:300px;
 }
 
-@keyframes flotar{
-    0%{transform:translateY(0)}
-    50%{transform:translateY(-10px)}
-    100%{transform:translateY(0)}
+/* animación para dibujar líneas */
+.linea{
+fill:none;
+stroke:green;
+stroke-width:4;
+stroke-dasharray:200;
+stroke-dashoffset:200;
+animation: dibujar 3s forwards;
 }
 
-/* tallos */
-.tallo{
-    width:6px;
-    height:120px;
-    background:green;
-    position:absolute;
-    bottom:-120px;
-    left:50%;
+.linea:nth-child(2){animation-delay:0.5s;}
+.linea:nth-child(3){animation-delay:1s;}
+
+@keyframes dibujar{
+to{
+stroke-dashoffset:0;
+}
 }
 
-/* flor */
+/* flores creciendo */
+
 .flor{
-    width:40px;
-    height:40px;
-    position:absolute;
-    animation: aparecer 2s forwards;
+transform:scale(0);
+transform-origin:center;
+animation: crecer 1s forwards;
 }
 
-.petalo{
-    width:20px;
-    height:20px;
-    background:pink;
-    border-radius:50%;
-    position:absolute;
+.flor:nth-of-type(1){animation-delay:3s;}
+.flor:nth-of-type(2){animation-delay:3.5s;}
+.flor:nth-of-type(3){animation-delay:4s;}
+
+@keyframes crecer{
+to{
+transform:scale(1);
 }
-
-.centro{
-    width:15px;
-    height:15px;
-    background:yellow;
-    border-radius:50%;
-    position:absolute;
-    top:12px;
-    left:12px;
-}
-
-/* posiciones de pétalos */
-.petalo:nth-child(1){top:0; left:10px;}
-.petalo:nth-child(2){top:10px; left:0;}
-.petalo:nth-child(3){top:10px; right:0;}
-.petalo:nth-child(4){bottom:0; left:10px;}
-
-@keyframes aparecer{
-    from{transform:scale(0); opacity:0;}
-    to{transform:scale(1); opacity:1;}
 }
 
 .texto{
-    margin-top:150px;
-    font-size:28px;
-    color:#b30059;
+margin-top:20px;
+font-size:28px;
+color:#b30059;
+animation: aparecer 2s forwards;
+animation-delay:4.5s;
+opacity:0;
+}
+
+@keyframes aparecer{
+to{
+opacity:1;
+}
 }
 
 </style>
@@ -85,38 +77,43 @@ body{
 
 <body>
 
-<div class="ramo">
+<svg viewBox="0 0 200 300">
 
-<div class="tallo"></div>
+<!-- tallos -->
+<path class="linea" d="M100 300 Q100 200 90 120"/>
+<path class="linea" d="M100 300 Q120 210 140 120"/>
+<path class="linea" d="M100 300 Q80 210 60 140"/>
 
-<div class="flor" style="top:-40px; left:-20px;">
-<div class="petalo"></div>
-<div class="petalo"></div>
-<div class="petalo"></div>
-<div class="petalo"></div>
-<div class="centro"></div>
-</div>
+<!-- flores -->
 
-<div class="flor" style="top:-60px; left:20px; animation-delay:1s;">
-<div class="petalo"></div>
-<div class="petalo"></div>
-<div class="petalo"></div>
-<div class="petalo"></div>
-<div class="centro"></div>
-</div>
+<g class="flor">
+<circle cx="90" cy="110" r="10" fill="yellow"/>
+<circle cx="90" cy="95" r="8" fill="pink"/>
+<circle cx="105" cy="110" r="8" fill="pink"/>
+<circle cx="75" cy="110" r="8" fill="pink"/>
+<circle cx="90" cy="125" r="8" fill="pink"/>
+</g>
 
-<div class="flor" style="top:-30px; left:40px; animation-delay:2s;">
-<div class="petalo"></div>
-<div class="petalo"></div>
-<div class="petalo"></div>
-<div class="petalo"></div>
-<div class="centro"></div>
-</div>
+<g class="flor">
+<circle cx="140" cy="110" r="10" fill="yellow"/>
+<circle cx="140" cy="95" r="8" fill="red"/>
+<circle cx="155" cy="110" r="8" fill="red"/>
+<circle cx="125" cy="110" r="8" fill="red"/>
+<circle cx="140" cy="125" r="8" fill="red"/>
+</g>
 
-</div>
+<g class="flor">
+<circle cx="60" cy="130" r="10" fill="yellow"/>
+<circle cx="60" cy="115" r="8" fill="purple"/>
+<circle cx="75" cy="130" r="8" fill="purple"/>
+<circle cx="45" cy="130" r="8" fill="purple"/>
+<circle cx="60" cy="145" r="8" fill="purple"/>
+</g>
+
+</svg>
 
 <div class="texto">
-Este ramo es para ti 🌸
+Este ramo floreció para ti 🌸
 </div>
 
 </body>
