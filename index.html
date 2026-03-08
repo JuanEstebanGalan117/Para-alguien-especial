@@ -2,17 +2,18 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<title>Ramo animado</title>
+<title>Flor mágica</title>
 
 <style>
 
 body{
-background:#ffe6f0;
+background:linear-gradient(#ffe6f0,#fff);
+height:100vh;
 display:flex;
 flex-direction:column;
 justify-content:center;
 align-items:center;
-height:100vh;
+overflow:hidden;
 font-family:Arial;
 }
 
@@ -20,56 +21,108 @@ svg{
 width:300px;
 }
 
-/* animación para dibujar líneas */
-.linea{
-fill:none;
-stroke:green;
-stroke-width:4;
-stroke-dasharray:200;
-stroke-dashoffset:200;
-animation: dibujar 3s forwards;
+/* tierra */
+
+.tierra{
+width:200px;
+height:40px;
+background:#6b3e26;
+border-radius:50%;
+position:absolute;
+bottom:120px;
 }
 
-.linea:nth-child(2){animation-delay:0.5s;}
-.linea:nth-child(3){animation-delay:1s;}
+/* tallo */
 
-@keyframes dibujar{
+.tallo{
+fill:none;
+stroke:green;
+stroke-width:5;
+stroke-dasharray:300;
+stroke-dashoffset:300;
+animation: crecerTallo 3s forwards;
+}
+
+@keyframes crecerTallo{
 to{
 stroke-dashoffset:0;
 }
 }
 
-/* flores creciendo */
+/* hojas */
 
-.flor{
+.hoja{
+fill:green;
 transform:scale(0);
 transform-origin:center;
-animation: crecer 1s forwards;
+animation: aparecer 1s forwards;
 }
 
-.flor:nth-of-type(1){animation-delay:3s;}
-.flor:nth-of-type(2){animation-delay:3.5s;}
-.flor:nth-of-type(3){animation-delay:4s;}
-
-@keyframes crecer{
-to{
-transform:scale(1);
-}
-}
-
-.texto{
-margin-top:20px;
-font-size:28px;
-color:#b30059;
-animation: aparecer 2s forwards;
-animation-delay:4.5s;
-opacity:0;
-}
+.hoja:nth-of-type(1){animation-delay:2s}
+.hoja:nth-of-type(2){animation-delay:2.5s}
 
 @keyframes aparecer{
-to{
-opacity:1;
+to{transform:scale(1)}
 }
+
+/* pétalos */
+
+.petaloFlor{
+transform:scale(0);
+transform-origin:center;
+animation: abrirPetalo 0.8s forwards;
+}
+
+.petaloFlor:nth-child(1){animation-delay:3s}
+.petaloFlor:nth-child(2){animation-delay:3.2s}
+.petaloFlor:nth-child(3){animation-delay:3.4s}
+.petaloFlor:nth-child(4){animation-delay:3.6s}
+.petaloFlor:nth-child(5){animation-delay:3.8s}
+
+@keyframes abrirPetalo{
+to{transform:scale(1)}
+}
+
+/* centro */
+
+.centro{
+fill:yellow;
+opacity:0;
+animation: centro 1s forwards;
+animation-delay:4s;
+}
+
+@keyframes centro{
+to{opacity:1}
+}
+
+/* pétalos cayendo */
+
+.caida{
+position:absolute;
+top:-20px;
+font-size:20px;
+animation: caer linear infinite;
+}
+
+@keyframes caer{
+0%{transform:translateY(-10vh) rotate(0deg)}
+100%{transform:translateY(110vh) rotate(360deg)}
+}
+
+/* texto */
+
+.texto{
+font-size:30px;
+color:#b30059;
+margin-top:30px;
+opacity:0;
+animation: mostrar 2s forwards;
+animation-delay:5s;
+}
+
+@keyframes mostrar{
+to{opacity:1}
 }
 
 </style>
@@ -77,44 +130,55 @@ opacity:1;
 
 <body>
 
+<div class="tierra"></div>
+
 <svg viewBox="0 0 200 300">
 
-<!-- tallos -->
-<path class="linea" d="M100 300 Q100 200 90 120"/>
-<path class="linea" d="M100 300 Q120 210 140 120"/>
-<path class="linea" d="M100 300 Q80 210 60 140"/>
+<!-- tallo -->
+<path class="tallo" d="M100 280 Q100 200 100 140"/>
 
-<!-- flores -->
+<!-- hojas -->
+<ellipse class="hoja" cx="90" cy="210" rx="10" ry="18"/>
+<ellipse class="hoja" cx="110" cy="190" rx="10" ry="18"/>
 
-<g class="flor">
-<circle cx="90" cy="110" r="10" fill="yellow"/>
-<circle cx="90" cy="95" r="8" fill="pink"/>
-<circle cx="105" cy="110" r="8" fill="pink"/>
-<circle cx="75" cy="110" r="8" fill="pink"/>
-<circle cx="90" cy="125" r="8" fill="pink"/>
-</g>
+<!-- pétalos -->
+<circle class="petaloFlor" cx="100" cy="120" r="15" fill="pink"/>
+<circle class="petaloFlor" cx="85" cy="135" r="15" fill="pink"/>
+<circle class="petaloFlor" cx="115" cy="135" r="15" fill="pink"/>
+<circle class="petaloFlor" cx="90" cy="155" r="15" fill="pink"/>
+<circle class="petaloFlor" cx="110" cy="155" r="15" fill="pink"/>
 
-<g class="flor">
-<circle cx="140" cy="110" r="10" fill="yellow"/>
-<circle cx="140" cy="95" r="8" fill="red"/>
-<circle cx="155" cy="110" r="8" fill="red"/>
-<circle cx="125" cy="110" r="8" fill="red"/>
-<circle cx="140" cy="125" r="8" fill="red"/>
-</g>
-
-<g class="flor">
-<circle cx="60" cy="130" r="10" fill="yellow"/>
-<circle cx="60" cy="115" r="8" fill="purple"/>
-<circle cx="75" cy="130" r="8" fill="purple"/>
-<circle cx="45" cy="130" r="8" fill="purple"/>
-<circle cx="60" cy="145" r="8" fill="purple"/>
-</g>
+<!-- centro -->
+<circle class="centro" cx="100" cy="140" r="12"/>
 
 </svg>
 
 <div class="texto">
-Este ramo floreció para ti
+Este ramo creció solo para ti 🌸
 </div>
+
+<script>
+
+function petalo(){
+
+const p=document.createElement("div")
+p.classList.add("caida")
+p.innerHTML="🌸"
+
+p.style.left=Math.random()*100+"vw"
+p.style.animationDuration=(5+Math.random()*5)+"s"
+
+document.body.appendChild(p)
+
+setTimeout(()=>{
+p.remove()
+},10000)
+
+}
+
+setInterval(petalo,400)
+
+</script>
 
 </body>
 </html>
