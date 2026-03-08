@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Un ramo para ti</title>
+
+<style>
+body{
+    background: linear-gradient(#ffd6e7,#fff);
+    height:100vh;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    font-family: Arial, Helvetica, sans-serif;
+    overflow:hidden;
+}
+
+.ramo{
+    font-size:90px;
+    animation: flotar 3s ease-in-out infinite;
+}
+
+@keyframes flotar{
+    0%{transform: translateY(0px);}
+    50%{transform: translateY(-15px);}
+    100%{transform: translateY(0px);}
+}
+
+.texto{
+    margin-top:30px;
+    font-size:32px;
+    color:#b30059;
+    border-right:3px solid #b30059;
+    white-space:nowrap;
+    overflow:hidden;
+    width:0;
+    animation: escribir 5s steps(30,end) forwards, parpadeo .8s infinite;
+}
+
+@keyframes escribir{
+    from{width:0}
+    to{width:18ch}
+}
+
+@keyframes parpadeo{
+    50%{border-color:transparent}
+}
+
+.corazon{
+    position:absolute;
+    font-size:25px;
+    animation: subir 6s linear infinite;
+}
+
+@keyframes subir{
+    from{
+        transform:translateY(100vh);
+        opacity:1;
+    }
+    to{
+        transform:translateY(-10vh);
+        opacity:0;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="ramo">
+💐🌹🌸🌷🌺
+</div>
+
+<div class="texto">
+Este ramo es para ti ❤️
+</div>
+
+<script>
+function crearCorazon(){
+    const corazon=document.createElement("div");
+    corazon.classList.add("corazon");
+    corazon.innerHTML="❤️";
+    corazon.style.left=Math.random()*100+"vw";
+    corazon.style.animationDuration=(3+Math.random()*3)+"s";
+    document.body.appendChild(corazon);
+
+    setTimeout(()=>{
+        corazon.remove();
+    },6000);
+}
+
+setInterval(crearCorazon,500);
+</script>
+
+</body>
+</html>
