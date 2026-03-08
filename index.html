@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<title>Flor mágica</title>
+<title>Un regalo para ti</title>
 
 <style>
 
@@ -10,43 +10,67 @@ body{
 background:linear-gradient(#ffe6f0,#fff);
 height:100vh;
 display:flex;
-flex-direction:column;
 justify-content:center;
 align-items:center;
-overflow:hidden;
+flex-direction:column;
 font-family:Arial;
+overflow:hidden;
+}
+
+/* botón */
+
+#boton{
+padding:15px 30px;
+font-size:20px;
+background:#ff4d88;
+color:white;
+border:none;
+border-radius:10px;
+cursor:pointer;
+transition:0.3s;
+}
+
+#boton:hover{
+background:#ff1a66;
+transform:scale(1.1);
+}
+
+/* escena oculta */
+
+#escena{
+display:none;
+flex-direction:column;
+align-items:center;
 }
 
 svg{
-width:300px;
+width:350px;
 }
 
 /* tierra */
 
 .tierra{
-width:200px;
-height:40px;
+width:220px;
+height:50px;
 background:#6b3e26;
 border-radius:50%;
 position:absolute;
 bottom:120px;
 }
 
-/* tallo */
+/* tallos */
 
 .tallo{
 fill:none;
 stroke:green;
 stroke-width:5;
-stroke-dasharray:300;
-stroke-dashoffset:300;
+stroke-dasharray:400;
+stroke-dashoffset:400;
 animation: crecerTallo 3s forwards;
 }
 
 @keyframes crecerTallo{
-to{
-stroke-dashoffset:0;
-}
+to{stroke-dashoffset:0}
 }
 
 /* hojas */
@@ -55,50 +79,36 @@ stroke-dashoffset:0;
 fill:green;
 transform:scale(0);
 transform-origin:center;
-animation: aparecer 1s forwards;
+animation: hoja 1s forwards;
 }
 
 .hoja:nth-of-type(1){animation-delay:2s}
 .hoja:nth-of-type(2){animation-delay:2.5s}
+.hoja:nth-of-type(3){animation-delay:3s}
 
-@keyframes aparecer{
+@keyframes hoja{
 to{transform:scale(1)}
 }
 
-/* pétalos */
+/* flores */
 
-.petaloFlor{
+.flor{
 transform:scale(0);
 transform-origin:center;
-animation: abrirPetalo 0.8s forwards;
+animation: flor 1s forwards;
 }
 
-.petaloFlor:nth-child(1){animation-delay:3s}
-.petaloFlor:nth-child(2){animation-delay:3.2s}
-.petaloFlor:nth-child(3){animation-delay:3.4s}
-.petaloFlor:nth-child(4){animation-delay:3.6s}
-.petaloFlor:nth-child(5){animation-delay:3.8s}
+.flor:nth-of-type(1){animation-delay:3.5s}
+.flor:nth-of-type(2){animation-delay:4s}
+.flor:nth-of-type(3){animation-delay:4.5s}
 
-@keyframes abrirPetalo{
+@keyframes flor{
 to{transform:scale(1)}
-}
-
-/* centro */
-
-.centro{
-fill:yellow;
-opacity:0;
-animation: centro 1s forwards;
-animation-delay:4s;
-}
-
-@keyframes centro{
-to{opacity:1}
 }
 
 /* pétalos cayendo */
 
-.caida{
+.petalo{
 position:absolute;
 top:-20px;
 font-size:20px;
@@ -106,22 +116,22 @@ animation: caer linear infinite;
 }
 
 @keyframes caer{
-0%{transform:translateY(-10vh) rotate(0deg)}
+0%{transform:translateY(-10vh) rotate(0)}
 100%{transform:translateY(110vh) rotate(360deg)}
 }
 
-/* texto */
+/* mensaje */
 
 .texto{
-font-size:30px;
-color:#b30059;
 margin-top:30px;
+font-size:32px;
+color:#b30059;
 opacity:0;
-animation: mostrar 2s forwards;
-animation-delay:5s;
+animation: aparecer 2s forwards;
+animation-delay:5.5s;
 }
 
-@keyframes mostrar{
+@keyframes aparecer{
 to{opacity:1}
 }
 
@@ -130,39 +140,74 @@ to{opacity:1}
 
 <body>
 
+<button id="boton">🎁 Abrir mi regalo</button>
+
+<div id="escena">
+
 <div class="tierra"></div>
 
 <svg viewBox="0 0 200 300">
 
-<!-- tallo -->
-<path class="tallo" d="M100 280 Q100 200 100 140"/>
+<!-- tallos -->
+<path class="tallo" d="M100 280 Q100 200 90 140"/>
+<path class="tallo" d="M100 280 Q120 210 140 140"/>
+<path class="tallo" d="M100 280 Q80 210 60 150"/>
 
 <!-- hojas -->
-<ellipse class="hoja" cx="90" cy="210" rx="10" ry="18"/>
-<ellipse class="hoja" cx="110" cy="190" rx="10" ry="18"/>
+<ellipse class="hoja" cx="95" cy="210" rx="10" ry="18"/>
+<ellipse class="hoja" cx="120" cy="200" rx="10" ry="18"/>
+<ellipse class="hoja" cx="75" cy="220" rx="10" ry="18"/>
 
-<!-- pétalos -->
-<circle class="petaloFlor" cx="100" cy="120" r="15" fill="pink"/>
-<circle class="petaloFlor" cx="85" cy="135" r="15" fill="pink"/>
-<circle class="petaloFlor" cx="115" cy="135" r="15" fill="pink"/>
-<circle class="petaloFlor" cx="90" cy="155" r="15" fill="pink"/>
-<circle class="petaloFlor" cx="110" cy="155" r="15" fill="pink"/>
+<!-- flores -->
+<g class="flor">
+<circle cx="90" cy="120" r="12" fill="yellow"/>
+<circle cx="90" cy="105" r="10" fill="pink"/>
+<circle cx="105" cy="120" r="10" fill="pink"/>
+<circle cx="75" cy="120" r="10" fill="pink"/>
+<circle cx="90" cy="135" r="10" fill="pink"/>
+</g>
 
-<!-- centro -->
-<circle class="centro" cx="100" cy="140" r="12"/>
+<g class="flor">
+<circle cx="140" cy="130" r="12" fill="yellow"/>
+<circle cx="140" cy="115" r="10" fill="red"/>
+<circle cx="155" cy="130" r="10" fill="red"/>
+<circle cx="125" cy="130" r="10" fill="red"/>
+<circle cx="140" cy="145" r="10" fill="red"/>
+</g>
+
+<g class="flor">
+<circle cx="60" cy="140" r="12" fill="yellow"/>
+<circle cx="60" cy="125" r="10" fill="purple"/>
+<circle cx="75" cy="140" r="10" fill="purple"/>
+<circle cx="45" cy="140" r="10" fill="purple"/>
+<circle cx="60" cy="155" r="10" fill="purple"/>
+</g>
 
 </svg>
 
 <div class="texto">
-Este ramo creció solo para ti 🌸
+Este ramo floreció solo para ti 🌸
+</div>
+
 </div>
 
 <script>
 
+/* abrir regalo */
+
+document.getElementById("boton").onclick=function(){
+
+document.getElementById("boton").style.display="none"
+document.getElementById("escena").style.display="flex"
+
+}
+
+/* pétalos cayendo */
+
 function petalo(){
 
 const p=document.createElement("div")
-p.classList.add("caida")
+p.classList.add("petalo")
 p.innerHTML="🌸"
 
 p.style.left=Math.random()*100+"vw"
@@ -176,7 +221,7 @@ p.remove()
 
 }
 
-setInterval(petalo,400)
+setInterval(petalo,500)
 
 </script>
 
